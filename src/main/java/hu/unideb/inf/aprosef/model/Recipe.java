@@ -163,37 +163,37 @@ public class Recipe {
 	public static class Ingredient {
 
 		@XmlElement(required=true)
-		private Double quantity;
+		private Double amount;
 		
-		@XmlAttribute(required=true)
-		private String quantityType;
+		@XmlElement(required=true)
+		private String unit;
 		
 		@XmlElement(required=true)
 		private String ingredient;
 		
 		public Ingredient() {}
 		
-		public Ingredient(Double quantity, String quantityType, String ingredient) {
+		public Ingredient(Double amount, String unit, String ingredient) {
 			super();
-			this.quantity = quantity;
-			this.quantityType = quantityType;
+			this.amount = amount;
+			this.unit = unit;
 			this.ingredient = ingredient;
 		}
 
-		public Double getQuantity() {
-			return quantity;
+		public Double getAmount() {
+			return amount;
 		}
 
-		public void setQuantity(Double quantity) {
-			this.quantity = quantity;
+		public void setAmount(Double amount) {
+			this.amount = amount;
 		}
 
-		public String getQuantityType() {
-			return quantityType;
+		public String getUnit() {
+			return unit;
 		}
 
-		public void setQuantityType(String quantityType) {
-			this.quantityType = quantityType;
+		public void setUnit(String unit) {
+			this.unit = unit;
 		}
 
 		public String getIngredient() {
@@ -226,6 +226,17 @@ public class Recipe {
 		
 		recipe.setAuthors(authList);
 		
+		Ingredient in = new Ingredient();
+		
+		in.setAmount(10.0);
+		in.setUnit("dkg");
+		in.setIngredient("cukor");
+		
+		List<Ingredient> inList = new ArrayList<Recipe.Ingredient>();
+		
+		inList.add(in);
+		
+		recipe.setIngredients(inList);
 		
 		JAXBUtil.toXML(recipe, System.out);
 		
