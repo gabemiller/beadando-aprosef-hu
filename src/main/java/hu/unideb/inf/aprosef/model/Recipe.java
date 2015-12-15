@@ -8,10 +8,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import hu.unideb.inf.jaxb.JAXBUtil;
 
-@javax.xml.bind.annotation.XmlRootElement
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Recipe {
 	
@@ -158,6 +159,13 @@ public class Recipe {
 		public void setProfile(String profile) {
 			this.profile = profile;
 		}
+
+		@Override
+		public String toString() {
+			return "Author [name=" + name + ", profile=" + profile + "]";
+		}
+		
+		
 		
 		
 	}
@@ -165,10 +173,10 @@ public class Recipe {
 	@XmlAccessorType(XmlAccessType.FIELD)
 	public static class Ingredient {
 
-		@XmlElement(required=true)
+		@XmlElement(required=false)
 		private Double amount;
 		
-		@XmlElement(required=true)
+		@XmlElement(required=false)
 		private String unit;
 		
 		@XmlElement(required=true)
@@ -205,7 +213,14 @@ public class Recipe {
 
 		public void setName(String name) {
 			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return "Ingredient [amount=" + amount + ", unit=" + unit + ", name=" + name + "]";
 		}	
+		
+		
 		
 	}
 	
@@ -241,17 +256,31 @@ public class Recipe {
 		public void setText(String text) {
 			this.text = text;
 		}
+
+		@Override
+		public String toString() {
+			return "Instruction [step=" + step + ", text=" + text + "]";
+		}
 		
 		
 		
 	}
 	
+	
+	
+	@Override
+	public String toString() {
+		return "Recipe [image=" + image + ", title=" + title + ", author=" + author + ", yield=" + yield
+				+ ", ingredients=" + ingredients + ", totalTime=" + totalTime + ", description=" + description
+				+ ", instructions=" + instructions + "]";
+	}
+
 	public static void main(String[] args) throws Exception {
 		
 		Recipe recipe = new Recipe();
 		
 		recipe.setImage("http://aprosef.hu/sites/default/files/styles/mainphoto_870x468/public/mainphotos/2014/habkarika13.jpg?itok=0-5dB9Wq");
-		recipe.setTitle("Karácsonyi habkarika recept");
+		recipe.setTitle("Karï¿½csonyi habkarika recept");
 		recipe.setTotalTime(160);
 		recipe.setYield(13);
 		
@@ -277,7 +306,7 @@ public class Recipe {
 		Instruction ins = new Instruction();
 		
 		ins.setStep(1);
-		ins.setText("Valami szöveg");
+		ins.setText("Valami szï¿½veg");
 		
 		List<Instruction> insList = new ArrayList<Recipe.Instruction>();
 		

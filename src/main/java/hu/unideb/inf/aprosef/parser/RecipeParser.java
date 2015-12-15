@@ -99,7 +99,7 @@ public class RecipeParser {
 						ing.setUnit(null);
 					}
 				} else {
-					String[] ownText = e.ownText().split(" ", 1);
+					String[] ownText = e.ownText().trim().split(" ", 2);
 
 					if (ownText.length == 2) {
 						ing.setUnit(ownText[0]);
@@ -158,7 +158,7 @@ public class RecipeParser {
 
 	public static void main(String[] args) throws Exception {
 		try {
-			Recipe recipe = new RecipeParser().parse("http://aprosef.hu/kakukkfuves_gesztenyekremleves_recept");
+			Recipe recipe = new RecipeParser().parse("http://aprosef.hu/paradicsomszoszos_gombas_penne_recept");
 			System.out.println(recipe);
 			JAXBUtil.toXML(recipe, System.out);
 		} catch (Exception e) {

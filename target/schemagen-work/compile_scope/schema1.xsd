@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="recipe" type="recipe"/>
+
+  <xs:complexType name="recipe">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="author" type="author"/>
+      <xs:element name="yield" type="xs:int"/>
+      <xs:element name="ingredients" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="ingredient" type="ingredient" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="totalTime" type="xs:int"/>
+      <xs:element name="description" type="xs:string"/>
+      <xs:element name="instructions" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="step" type="instruction" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="image" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="author">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="profile" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="ingredient">
+    <xs:sequence>
+      <xs:element name="amount" type="xs:double" minOccurs="0"/>
+      <xs:element name="unit" type="xs:string" minOccurs="0"/>
+      <xs:element name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="instruction">
+    <xs:sequence>
+      <xs:element name="text" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="step" type="xs:int" use="required"/>
+  </xs:complexType>
+</xs:schema>
+

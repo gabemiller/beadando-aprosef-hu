@@ -73,7 +73,9 @@
 				</executions>
 				<configuration>
 					<sources>
-						<source>src/main/java/model/Greeting.java</source>
+						<source>src/main/java/hu/unideb/inf/aprosef/model/Recipe.java</source>
+						<source>src/main/java/hu/unideb/inf/aprosef/model/SearchResultItem.java</source>
+						<source>src/main/java/hu/unideb/inf/aprosef/model/SearchResults.java</source>
 					</sources>
 				</configuration>
 			</plugin>
