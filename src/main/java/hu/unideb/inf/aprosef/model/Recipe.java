@@ -19,11 +19,10 @@ public class Recipe {
 	private String image;
 	
 	@XmlElement(required=true)
-	private String name;
+	private String title;
 	
-	@XmlElement(name="author",required=true)
-	@XmlElementWrapper(name="authors")
-	private List<Author> authors = new ArrayList<Author>();
+	@XmlElement(required=true)
+	private Author author = new Author();
 	
 	@XmlElement(required=true)
 	private Integer yield;
@@ -38,19 +37,20 @@ public class Recipe {
 	@XmlElement(required=true)
 	private String description;
 	
-	@XmlElement(required=true)
-	private String instructions;
+	@XmlElement(name="step",required=true)
+	@XmlElementWrapper(name="instructions")
+	private List<Instruction> instructions = new ArrayList<Instruction>();
 	
 	public Recipe(){
 	
 	}
 	
-	public Recipe(String image, String name, List<Author> authors, Integer yield, List<Ingredient> ingredients,
-			Integer totalTime, String description, String instructions) {
+	public Recipe(String image, String title, Author author, Integer yield, List<Ingredient> ingredients,
+			Integer totalTime, String description, List<Instruction>  instructions) {
 		super();
 		this.image = image;
-		this.name = name;
-		this.authors = authors;
+		this.title = title;
+		this.author = author;
 		this.yield = yield;
 		this.ingredients = ingredients;
 		this.totalTime = totalTime;
@@ -66,20 +66,20 @@ public class Recipe {
 		this.image = image;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public List<Author> getAuthors() {
-		return authors;
+	public Author getAuthor() {
+		return author;
 	}
 
-	public void setAuthors(List<Author> authors) {
-		this.authors = authors;
+	public void setAuthor(Author author) {
+		this.author = author;
 	}
 
 	public Integer getYield() {
@@ -113,16 +113,19 @@ public class Recipe {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public String getInstructions() {
+	
+	
+	public List<Instruction> getInstructions() {
 		return instructions;
 	}
 
-	public void setInstructions(String instructions) {
+	public void setInstructions(List<Instruction> instructions) {
 		this.instructions = instructions;
 	}
-	
-	
+
+
+
+
 	@XmlAccessorType(XmlAccessType.FIELD)
 	public static class Author {
 
@@ -169,15 +172,15 @@ public class Recipe {
 		private String unit;
 		
 		@XmlElement(required=true)
-		private String ingredient;
+		private String name;
 		
 		public Ingredient() {}
 		
-		public Ingredient(Double amount, String unit, String ingredient) {
+		public Ingredient(Double amount, String unit, String name) {
 			super();
 			this.amount = amount;
 			this.unit = unit;
-			this.ingredient = ingredient;
+			this.name = name;
 		}
 
 		public Double getAmount() {
@@ -196,13 +199,50 @@ public class Recipe {
 			this.unit = unit;
 		}
 
-		public String getIngredient() {
-			return ingredient;
+		public String getName() {
+			return name;
 		}
 
-		public void setIngredient(String ingredient) {
-			this.ingredient = ingredient;
+		public void setName(String name) {
+			this.name = name;
 		}	
+		
+	}
+	
+	@XmlAccessorType(XmlAccessType.FIELD)
+	public static class Instruction{
+		
+		@XmlAttribute(required=true)
+		public Integer step;
+		
+		@XmlElement(required=true)
+		public String text;
+
+		public Instruction() {}
+		
+		public Instruction(Integer step, String text) {
+			super();
+			this.step = step;
+			this.text = text;
+		}
+
+		public Integer getStep() {
+			return step;
+		}
+
+		public void setStep(Integer step) {
+			this.step = step;
+		}
+
+		public String getText() {
+			return text;
+		}
+
+		public void setText(String text) {
+			this.text = text;
+		}
+		
+		
 		
 	}
 	
@@ -211,7 +251,7 @@ public class Recipe {
 		Recipe recipe = new Recipe();
 		
 		recipe.setImage("http://aprosef.hu/sites/default/files/styles/mainphoto_870x468/public/mainphotos/2014/habkarika13.jpg?itok=0-5dB9Wq");
-		recipe.setName("Karácsonyi habkarika recept");
+		recipe.setTitle("Karácsonyi habkarika recept");
 		recipe.setTotalTime(160);
 		recipe.setYield(13);
 		
@@ -219,24 +259,31 @@ public class Recipe {
 		
 		auth.setName("aprosef");
 		auth.setProfile("aprosef.hu");
-		
-		List<Author> authList = new ArrayList<Recipe.Author>();
-		
-		authList.add(auth);
-		
-		recipe.setAuthors(authList);
+	
+		recipe.setAuthor(auth);
 		
 		Ingredient in = new Ingredient();
 		
 		in.setAmount(10.0);
 		in.setUnit("dkg");
-		in.setIngredient("cukor");
+		in.setName("cukor");
 		
 		List<Ingredient> inList = new ArrayList<Recipe.Ingredient>();
 		
 		inList.add(in);
 		
 		recipe.setIngredients(inList);
+		
+		Instruction ins = new Instruction();
+		
+		ins.setStep(1);
+		ins.setText("Valami szöveg");
+		
+		List<Instruction> insList = new ArrayList<Recipe.Instruction>();
+		
+		insList.add(ins);
+		
+		recipe.setInstructions(insList);
 		
 		JAXBUtil.toXML(recipe, System.out);
 		
