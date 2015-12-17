@@ -47,7 +47,10 @@ public class RecipeSearch  extends SearchResultsParser{
 				System.out.println("Recipe is not found!");
 			else
 			JAXBUtil.toXML(recipe, System.out);
-		} catch (IOException | JAXBException e) {
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch(JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

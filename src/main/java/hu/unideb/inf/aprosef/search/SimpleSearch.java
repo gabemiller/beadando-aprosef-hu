@@ -40,11 +40,13 @@ public class SimpleSearch extends SearchResultsParser {
 		try {
 			SearchResults results = (new SimpleSearch(1)).doSearch("borsó");
 			JAXBUtil.toXML(results, System.out);
-		} catch (IOException | JAXBException e) {
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch(JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 }
