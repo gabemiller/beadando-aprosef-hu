@@ -19,7 +19,7 @@ public class SearchResultsParser {
 
 	private static Logger logger = LoggerFactory.getLogger(SearchResultsParser.class);
 
-	public static final int MAX_ITEMS = 67;
+	public static final int MAX_ITEMS = 10;
 
 	private int maxItems = MAX_ITEMS;
 
