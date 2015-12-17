@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author Molnár Gábor
+ * @author GÃ¡bor
  *
  */
 package hu.unideb.inf.aprosef.model;

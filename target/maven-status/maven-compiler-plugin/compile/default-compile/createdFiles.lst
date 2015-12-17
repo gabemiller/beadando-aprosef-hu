@@ -1,8 +1,0 @@
-hu\unideb\inf\aprosef\model\SearchResults.class
-hu\unideb\inf\aprosef\model\SearchResultItem.class
-hu\unideb\inf\aprosef\parser\RecipeParser.class
-hu\unideb\inf\aprosef\model\Recipe.class
-hu\unideb\inf\aprosef\model\Recipe$Instruction.class
-hu\unideb\inf\aprosef\model\Recipe$Author.class
-hu\unideb\inf\jaxb\JAXBUtil.class
-hu\unideb\inf\aprosef\model\Recipe$Ingredient.class

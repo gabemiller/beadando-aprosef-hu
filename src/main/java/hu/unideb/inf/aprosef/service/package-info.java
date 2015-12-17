@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author Gábor
+ * @author GÃ¡bor
  *
  */
 package hu.unideb.inf.aprosef.service;
