@@ -16,7 +16,7 @@ public class RecipeResource extends ServerResource {
 	public Recipe represent(){
 		String	name = getAttribute("name");
 		try {
-			return new RecipeSearch().doSearch(name);
+			return new RecipeSearch().doSearchByUri(name);
 		} catch (IOException e) {
 			throw new ResourceException(Status.SERVER_ERROR_INTERNAL);
 		}

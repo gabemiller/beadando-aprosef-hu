@@ -1,56 +1,46 @@
 package hu.unideb.inf.aprosef.search;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
 import javax.xml.bind.JAXBException;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
 import hu.unideb.inf.aprosef.model.Recipe;
-import hu.unideb.inf.aprosef.model.SearchResults;
 import hu.unideb.inf.aprosef.parser.RecipeParser;
-import hu.unideb.inf.aprosef.parser.SearchResultsParser;
 import hu.unideb.inf.jaxb.JAXBUtil;
 
-
-public class RecipeSearch  extends SearchResultsParser{
-	private static final String SEARCH_URI = "http://aprosef.hu/kereses/minden";
+public class RecipeSearch extends RecipeParser {
+	private static final String SEARCH_URI = "http://aprosef.hu";
 
 	public RecipeSearch() {
-		super(1);
 	}
+
 
 	/**
 	 * 
-	 * @param name
+	 * @param URI
 	 * @return
 	 * @throws IOException
 	 */
-	public Recipe doSearch(String name) throws IOException {
+	public Recipe doSearchByUri(String URI) throws IOException {
+
 		
-		String searchUri = SEARCH_URI + "/" + URLEncoder.encode(name,"UTF-8") + "/0";
-		
-		Document doc = Jsoup.connect(searchUri).userAgent("Mozilla").get();
-		SearchResults results = parse(doc);
-		if (results.getItems().size() == 0)
-			return null;
-		String uri = results.getItems().get(0).getUri();
-		return new RecipeParser().parse("http://aprosef.hu"+uri);
+		String searchUri = SEARCH_URI + "/" + URI;
+
+		return parse(searchUri);
+
 	}
-	
+
 	public static void main(String[] args) {
 		try {
-			Recipe recipe = (new RecipeSearch()).doSearch("Zöldborsófőzelék");
-			if(recipe == null)
+			Recipe recipe = (new RecipeSearch()).doSearchByUri("bolognai_spagetti");
+			if (recipe == null)
 				System.out.println("Recipe is not found!");
 			else
-			JAXBUtil.toXML(recipe, System.out);
+				JAXBUtil.toXML(recipe, System.out);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch(JAXBException e) {
+		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
