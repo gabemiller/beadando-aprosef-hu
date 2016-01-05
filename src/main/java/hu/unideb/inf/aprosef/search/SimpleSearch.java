@@ -31,7 +31,7 @@ public class SimpleSearch extends SearchResultsParser {
 	 * @throws IOException
 	 */
 	public SearchResults doSearch(String searchTerm) throws IOException {
-		String uri = SEARCH_URI + "/" + URLEncoder.encode(searchTerm,"UTF-8") + "/0";
+		String uri = SEARCH_URI + "/" + searchTerm + "/0";
 		Document doc = Jsoup.connect(uri).userAgent("Mozilla").get();
 		return parse(doc);
 	}

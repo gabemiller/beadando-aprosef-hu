@@ -42,14 +42,14 @@ public class Recipe {
 
 	@XmlElement(name = "step", required = true)
 	@XmlElementWrapper(name = "instructions")
-	private List<Instruction> instructions;
+	private List<String> instructions;
 
 	public Recipe() {
 
 	}
 
 	public Recipe(String image, String title, Author author, Integer yield, List<Ingredient> ingredients,
-			Integer totalTime, String description, List<Instruction> instructions) {
+			Integer totalTime, String description, List<String> instructions) {
 		super();
 		this.image = image;
 		this.title = title;
@@ -117,11 +117,11 @@ public class Recipe {
 		this.description = description;
 	}
 
-	public List<Instruction> getInstructions() {
+	public List<String> getInstructions() {
 		return instructions;
 	}
 
-	public void setInstructions(List<Instruction> instructions) {
+	public void setInstructions(List<String> instructions) {
 		this.instructions = instructions;
 	}
 
@@ -218,46 +218,6 @@ public class Recipe {
 
 	}
 
-	@XmlAccessorType(XmlAccessType.FIELD)
-	public static class Instruction {
-
-		@XmlAttribute(required = true)
-		public Integer step;
-
-		@XmlElement(required = true)
-		public String text;
-
-		public Instruction() {
-		}
-
-		public Instruction(Integer step, String text) {
-			super();
-			this.step = step;
-			this.text = text;
-		}
-
-		public Integer getStep() {
-			return step;
-		}
-
-		public void setStep(Integer step) {
-			this.step = step;
-		}
-
-		public String getText() {
-			return text;
-		}
-
-		public void setText(String text) {
-			this.text = text;
-		}
-
-		@Override
-		public String toString() {
-			return ReflectionToStringBuilder.toString(this);
-		}
-
-	}
 
 	@Override
 	public String toString() {
@@ -292,15 +252,10 @@ public class Recipe {
 		inList.add(in);
 
 		recipe.setIngredients(inList);
+		
+		List<String> insList = new LinkedList<String>();
 
-		Instruction ins = new Instruction();
-
-		ins.setStep(1);
-		ins.setText("Valami sz�veg");
-
-		List<Instruction> insList = new LinkedList<Recipe.Instruction>();
-
-		insList.add(ins);
+		insList.add("Valami szöveg");
 
 		recipe.setInstructions(insList);
 

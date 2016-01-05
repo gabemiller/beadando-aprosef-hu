@@ -3,6 +3,7 @@ package hu.unideb.inf.aprosef.parser;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -14,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import hu.unideb.inf.aprosef.model.Recipe;
 import hu.unideb.inf.aprosef.model.Recipe.Author;
 import hu.unideb.inf.aprosef.model.Recipe.Ingredient;
-import hu.unideb.inf.aprosef.model.Recipe.Instruction;
 import hu.unideb.inf.jaxb.JAXBUtil;
 
 public class RecipeParser {
@@ -137,12 +137,10 @@ public class RecipeParser {
 		}
 		recipe.setDescription(description);
 
-		List<Instruction> instructions = new ArrayList<Instruction>();
+		List<String> instructions = new LinkedList<String>();
 		try {
 			for (Element e : doc.select("div[itemprop=recipeInstructions] > div.step")) {
-				Instruction ins = new Instruction();
-				ins.setStep(Integer.parseInt(e.select("div.stepnumber").first().text().trim()));
-				ins.setText(e.select("div.text").first().text().trim());
+				String ins = e.select("div.text").first().text().trim();
 
 				logger.info("Instruction: {}", ins);
 

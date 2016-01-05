@@ -31,7 +31,7 @@ public class SearchResource extends ServerResource {
 				return new SimpleSearch().doSearch(searchTerm);
 			}
 		} catch (IOException e) {
-			throw new ResourceException(Status.SERVER_ERROR_INTERNAL);
+			throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);
 		}
 	}
 }

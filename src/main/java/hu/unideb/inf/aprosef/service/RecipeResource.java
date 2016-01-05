@@ -18,7 +18,7 @@ public class RecipeResource extends ServerResource {
 		try {
 			return new RecipeSearch().doSearchByUri(name);
 		} catch (IOException e) {
-			throw new ResourceException(Status.SERVER_ERROR_INTERNAL);
+			throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);
 		}
 	}
 }

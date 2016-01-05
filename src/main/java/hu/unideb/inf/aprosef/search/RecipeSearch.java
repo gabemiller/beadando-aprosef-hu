@@ -30,6 +30,10 @@ public class RecipeSearch extends RecipeParser {
 
 	}
 
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		try {
 			Recipe recipe = (new RecipeSearch()).doSearchByUri("bolognai_spagetti");
